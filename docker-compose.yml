@@ -1,0 +1,13 @@
+services:
+    web:
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        volumes:
+            - .:/app # your source
+            - /app/node_modules # keep container’s node_modules
+        ports:
+            - '3000:3000' # map Vite port
+        environment:
+            - HOST=0.0.0.0
+            - PORT=3000

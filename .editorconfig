@@ -1,0 +1,5 @@
+[*.{js,jsx,mjs,cjs,ts,tsx,mts,cts,vue,yml,yaml}]
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = true
+insert_final_newline = true
