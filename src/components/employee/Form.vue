@@ -159,7 +159,7 @@
 import { useForm } from 'vee-validate'
 import { boolean, object, string } from 'yup'
 import { toTypedSchema } from '@vee-validate/yup'
-import { JobTitle, type Employee, type EmployeeData } from '@/types/employee'
+import { JobTitle, type EmployeeData } from '@/types/employee'
 import { isEmployeeData } from '@/types/guards/employee'
 
 const props = defineProps<{
@@ -184,7 +184,10 @@ const addressSchema = {
 }
 
 const { handleSubmit, errors, defineField, handleReset } = useForm({
-    initialValues: props.initialData,
+    initialValues: {
+        ...props.initialData,
+        hasMailingAddress: props.initialData?.mailingAddress !== undefined,
+    },
     validationSchema: toTypedSchema(
         object({
             firstNameAndLastName: string().required('Imię i nazwisko jest wymagane'),

@@ -3,30 +3,53 @@
         <v-icon start icon="mdi-information-outline" />
         Brak pracowników do wyświetlenia
     </div>
-    <v-table v-else>
-        <thead>
-            <tr>
-                <th class="text-left">Imię i nazwisko</th>
-                <th class="text-left">Email</th>
-                <th class="text-left">Telefon</th>
-                <th class="text-left">Stanowisko</th>
-                <th class="text-left">Adres zamieszkania</th>
-                <th class="text-left">Adres do korespondencji</th>
-                <th class="text-left" max-width="25"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <EmployeeTableItem
-                v-for="employee in employeeList"
-                :key="employee.email"
-                :employee="employee"
-            />
-        </tbody>
-    </v-table>
+    <v-data-table v-else :headers :items="employeeList" :items-per-page="-1">
+        <template #item.jobTitle="{ item }">
+            <v-chip :color="getJobTitleColor(item.jobTitle)">{{ item.jobTitle }}</v-chip>
+        </template>
+        <template #item.residentialAddress="{ item }">
+            <EmployeeDisplayAddressText :address="item.residentialAddress" />
+        </template>
+        <template #item.mailingAddress="{ item }">
+            <EmployeeDisplayAddressText v-if="item.mailingAddress" :address="item.mailingAddress" />
+        </template>
+        <template #item.actions="{ item }">
+            <EmployeeTableItemActions :employee="item" />
+        </template>
+        <template #bottom></template>
+    </v-data-table>
 </template>
 
 <script lang="ts" setup>
-import type { Employee } from '@/types/employee'
+import { type Employee, JobTitle } from '@/types/employee'
+import type { DataTableHeader } from 'vuetify'
 
 defineProps<{ employeeList: Employee[] }>()
+
+const headers: DataTableHeader<Employee>[] = [
+    { title: 'Imię i nazwisko', key: 'firstNameAndLastName', width: '200px' },
+    { title: 'Email', key: 'email', width: '200px' },
+    { title: 'Telefon', key: 'phone', sortable: false, width: '160px' },
+    { title: 'Stanowisko', key: 'jobTitle', width: '100px' },
+    { title: 'Adres zamieszkania', key: 'residentialAddress', sortable: false, width: '200px' },
+    { title: 'Adres do korespondencji', key: 'mailingAddress', sortable: false, width: '200px' },
+    { key: 'actions', sortable: false, width: '116px' },
+]
+
+const getJobTitleColor = (title: JobTitle) => {
+    switch (title) {
+        case JobTitle.FRONT_END:
+            return 'primary'
+        case JobTitle.BACK_END:
+            return 'secondary'
+        case JobTitle.DESIGNER:
+            return 'warning'
+        case JobTitle.TESTER:
+            return 'error'
+        case JobTitle.PM:
+            return 'success'
+        default:
+            return undefined
+    }
+}
 </script>
