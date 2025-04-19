@@ -1,3 +1,2 @@
-# Ignore all YAML files:
-# **/*.yml
-# **/*.yaml
+.eslintrc-auto-import.json
+src/auto-imports.d.ts
