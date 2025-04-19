@@ -35,7 +35,6 @@
 </template>
 <script lang="ts" setup>
 import { useEmployeeListStore } from '@/stores/employeeList'
-import { toast } from 'vue3-toastify'
 
 const store = useEmployeeListStore()
 
