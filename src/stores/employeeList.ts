@@ -176,5 +176,28 @@ export const useEmployeeListStore = defineStore('employeeList', {
             this.employeeList.push({ id: nanoid(), ...data })
             if (notify) toast.success('Dodano nowego pracownika')
         },
+        editEmployee(
+            id: string,
+            data: EmployeeData,
+            options: {
+                /** Defaults to: `true`*/
+                notify?: boolean
+            } = { notify: true },
+        ) {
+            const { notify = true } = options
+
+            const employee = this.employeeList.find(employee => employee.id === id)
+
+            if (!employee) {
+                toast.error('Nie znaleziono pracownika do edycji')
+                console.warn(`Employee with id "${id}" not found.`)
+                return
+            }
+
+            // merge in the new data (id stays the same)
+            Object.assign(employee, data)
+
+            if (notify) toast.success('Edytowano dane pracownika')
+        },
     },
 })

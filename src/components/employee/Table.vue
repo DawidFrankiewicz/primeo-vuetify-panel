@@ -12,7 +12,7 @@
                 <th class="text-left">Stanowisko</th>
                 <th class="text-left">Adres zamieszkania</th>
                 <th class="text-left">Adres do korespondencji</th>
-                <th class="text-left"></th>
+                <th class="text-left" max-width="25"></th>
             </tr>
         </thead>
         <tbody>

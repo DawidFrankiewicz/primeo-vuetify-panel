@@ -1,7 +1,7 @@
 <template>
     <v-card class="py-8 px-12">
         <v-form novalidate @submit.prevent>
-            <h2 class="text-h3 pb-8">Dane pracownika</h2>
+            <h2 class="text-h3 pb-8">{{ title }}</h2>
             <v-text-field
                 v-model="firstNameAndLastName"
                 v-bind="firstNameAndLastNameAttrs"
@@ -143,6 +143,10 @@
                     Zamknij
                 </v-btn>
 
+                <v-btn color="orange" variant="tonal" @mousedown="handleReset">
+                    {{ initialData ? 'Przywróć' : 'Wyczyść' }}
+                </v-btn>
+
                 <v-btn color="primary" variant="tonal" type="submit" @mousedown="submit">
                     Zapisz
                 </v-btn>
@@ -155,11 +159,13 @@
 import { useForm } from 'vee-validate'
 import { boolean, object, string } from 'yup'
 import { toTypedSchema } from '@vee-validate/yup'
-import { JobTitle, type EmployeeData } from '@/types/employee'
+import { JobTitle, type Employee, type EmployeeData } from '@/types/employee'
 import { isEmployeeData } from '@/types/guards/employee'
 
-defineProps<{
+const props = defineProps<{
+    title: string
     hasCloseButton?: boolean
+    initialData?: Partial<EmployeeData>
 }>()
 
 const emit = defineEmits<{
@@ -177,7 +183,8 @@ const addressSchema = {
     apartmentNumber: string(),
 }
 
-const { handleSubmit, errors, defineField } = useForm({
+const { handleSubmit, errors, defineField, handleReset } = useForm({
+    initialValues: props.initialData,
     validationSchema: toTypedSchema(
         object({
             firstNameAndLastName: string().required('Imię i nazwisko jest wymagane'),

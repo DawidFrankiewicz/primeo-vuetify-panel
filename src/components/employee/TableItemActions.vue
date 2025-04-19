@@ -1,6 +1,31 @@
 <template>
     <div class="d-flex ga-4">
-        <v-btn :icon="'mdi-human-edit'" base-color="primary"></v-btn>
+        <v-dialog v-model="isEditEmployeeDialogActive" max-width="900">
+            <template #activator="{ props: activatorAttrs }">
+                <v-btn
+                    v-bind="activatorAttrs"
+                    :icon="'mdi-human-edit'"
+                    base-color="primary"
+                    @mousedown="isEditEmployeeDialogActive = true"
+                    @click.stop
+                ></v-btn>
+            </template>
+
+            <template #default="{ isActive }">
+                <EmployeeForm
+                    title="Edytuj dane pracownika"
+                    has-close-button
+                    :initial-data="employee"
+                    @close="isActive.value = false"
+                    @submit="
+                        data => {
+                            isActive.value = false
+                            store.editEmployee(employee.id, data)
+                        }
+                    "
+                />
+            </template>
+        </v-dialog>
         <v-dialog v-model="isRemoveDialogActive" max-width="370">
             <template #activator="{ props: activatorAttrs }">
                 <v-btn
@@ -21,6 +46,7 @@
                             Nie
                         </v-btn>
                         <v-btn
+                            variant="tonal"
                             size="42"
                             min-width="60"
                             @mousedown="
@@ -47,5 +73,6 @@ const store = useEmployeeListStore()
 
 defineProps<{ employee: Employee }>()
 
-const isRemoveDialogActive = ref(false)
+const isRemoveDialogActive = ref<boolean>(false)
+const isEditEmployeeDialogActive = ref<boolean>(false)
 </script>

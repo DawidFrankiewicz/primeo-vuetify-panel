@@ -18,6 +18,7 @@
 
                 <template #default="{ isActive }">
                     <EmployeeForm
+                        title="Dodaj pracownika"
                         has-close-button
                         @close="isActive.value = false"
                         @submit="
