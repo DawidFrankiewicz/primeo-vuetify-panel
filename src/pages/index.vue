@@ -1,9 +1,7 @@
 <template>
     <v-container>
-        <EmployeeDataForm />
+        <EmployeeWidget />
     </v-container>
-
-    <HelloWorld />
 </template>
 
 <script lang="ts" setup></script>

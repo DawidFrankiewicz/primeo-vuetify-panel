@@ -147,9 +147,9 @@
 import { useForm } from 'vee-validate'
 import { boolean, object, string } from 'yup'
 import { toTypedSchema } from '@vee-validate/yup'
+import { JobTitle } from '@/types/employee'
 
-type JobTitle = 'front-end' | 'back-end' | 'pm' | 'designer' | 'tester'
-const jobTitles: JobTitle[] = ['front-end', 'back-end', 'pm', 'designer', 'tester']
+const jobTitles: JobTitle[] = Object.values(JobTitle)
 
 const addressSchema = {
     country: string().required('Kraj jest wymagany'),

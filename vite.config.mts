@@ -36,6 +36,7 @@ export default defineConfig({
         }),
         Components({
             dts: 'src/components.d.ts',
+            directoryAsNamespace: true,
         }),
         Vue({
             template: { transformAssetUrls },
@@ -89,6 +90,7 @@ export default defineConfig({
     resolve: {
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url)),
+            '@types': fileURLToPath(new URL('./src/types', import.meta.url)),
         },
         extensions: ['.js', '.json', '.jsx', '.mjs', '.ts', '.tsx', '.vue'],
     },
