@@ -3,7 +3,7 @@
         <v-icon start icon="mdi-information-outline" />
         Brak pracowników do wyświetlenia
     </div>
-    <v-table v-else fixed-header>
+    <v-table v-else>
         <thead>
             <tr>
                 <th class="text-left">Imię i nazwisko</th>

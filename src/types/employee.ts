@@ -14,11 +14,15 @@ export interface Address {
     apartmentNumber?: string
 }
 
-export interface Employee {
+export interface EmployeeData {
     firstNameAndLastName: string
     email: string
     phone?: string
     jobTitle: JobTitle
     residentialAddress: Address
     mailingAddress?: Address
+}
+
+export interface Employee extends EmployeeData {
+    id: string
 }

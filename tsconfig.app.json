@@ -9,7 +9,9 @@
         "baseUrl": ".",
         "paths": {
             "@/*": ["./src/*"],
-            "@types/*": ["./src/types/*"]
+            "@types/*": ["./src/types/*"],
+            "@gurads/*": ["./src/types/guards/*"],
+            "@styles/*": ["./src/styles/*"]
         },
         "typeRoots": ["node_modules/@types", "src/types"]
     }

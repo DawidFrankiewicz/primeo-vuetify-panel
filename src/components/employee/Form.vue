@@ -1,6 +1,6 @@
 <template>
     <v-card class="py-8 px-12">
-        <v-form novalidate @submit.prevent="submit">
+        <v-form novalidate @submit.prevent>
             <h2 class="text-h3 pb-8">Dane pracownika</h2>
             <v-text-field
                 v-model="firstNameAndLastName"
@@ -134,11 +134,19 @@
                 </v-card>
             </template>
 
-            <div class="mt-4">
-                <v-btn class="me-4" type="submit" :base-color="'indigo'">wyślij</v-btn>
+            <v-divider class="mt-4"></v-divider>
 
-                <v-btn @click="handleReset">wyczyść</v-btn>
-            </div>
+            <v-card-actions>
+                <v-spacer></v-spacer>
+
+                <v-btn v-if="hasCloseButton" variant="plain" @mousedown="emit('close')">
+                    Zamknij
+                </v-btn>
+
+                <v-btn color="primary" variant="tonal" type="submit" @mousedown="submit">
+                    Zapisz
+                </v-btn>
+            </v-card-actions>
         </v-form>
     </v-card>
 </template>
@@ -147,7 +155,17 @@
 import { useForm } from 'vee-validate'
 import { boolean, object, string } from 'yup'
 import { toTypedSchema } from '@vee-validate/yup'
-import { JobTitle } from '@/types/employee'
+import { JobTitle, type EmployeeData } from '@/types/employee'
+import { isEmployeeData } from '@/types/guards/employee'
+
+defineProps<{
+    hasCloseButton?: boolean
+}>()
+
+const emit = defineEmits<{
+    close: []
+    submit: [employee: EmployeeData]
+}>()
 
 const jobTitles: JobTitle[] = Object.values(JobTitle)
 
@@ -159,7 +177,7 @@ const addressSchema = {
     apartmentNumber: string(),
 }
 
-const { handleSubmit, errors, handleReset, defineField } = useForm({
+const { handleSubmit, errors, defineField } = useForm({
     validationSchema: toTypedSchema(
         object({
             firstNameAndLastName: string().required('Imię i nazwisko jest wymagane'),
@@ -214,6 +232,15 @@ const [mailingAddressApartmentNumber, mailingAddressApartmentNumberAttrs] = defi
 )
 
 const submit = handleSubmit(values => {
-    alert(JSON.stringify(values, null, 2))
+    // Strip `hasMailingAddress` from output
+    const { hasMailingAddress: _, ...payload } = values
+
+    if (!isEmployeeData(payload)) {
+        // dev‑only: log and throw so you immediately see the problem, if it ever occures
+        console.error('[Form Submit] payload is not a valid EmployeeData:', payload)
+        throw new Error('Form payload type mismatch - expected EmployeeData')
+    }
+
+    emit('submit', payload)
 })
 </script>

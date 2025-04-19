@@ -61,5 +61,14 @@ export default [
                 },
             ],
         },
+        overrides: [
+            {
+                files: ['src/guards/**/*.ts'],
+                rules: {
+                    // turn off the “no explicit any” rule in guards
+                    '@typescript-eslint/no-explicit-any': 'off',
+                },
+            },
+        ],
     },
 ]

@@ -91,6 +91,8 @@ export default defineConfig({
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url)),
             '@types': fileURLToPath(new URL('./src/types', import.meta.url)),
+            '@guards': fileURLToPath(new URL('./src/types/gurads', import.meta.url)),
+            '@styles': fileURLToPath(new URL('./src/styles', import.meta.url)),
         },
         extensions: ['.js', '.json', '.jsx', '.mjs', '.ts', '.tsx', '.vue'],
     },

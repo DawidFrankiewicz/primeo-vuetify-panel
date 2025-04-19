@@ -1,0 +1,24 @@
+:root {
+    --toastify-color-dark: #424242; /* grey darken‑3 */
+    --toastify-color-info: #2196f3; /* info */
+    --toastify-color-success: #4caf50; /* success */
+    --toastify-color-warning: #fb8c00; /* warning */
+    --toastify-color-error: #ff5252; /* error */
+
+    --toastify-text-color-light: #212121;
+
+    --toastify-spinner-color: #757575; /* grey darken‑1 */
+    --toastify-spinner-color-empty-area: #e0e0e0; /* grey lighten‑2 */
+
+    // Used when no type is provided
+    --toastify-color-progress-light: linear-gradient(
+        to right,
+        #4caf50,
+        #2196f3,
+        #1976d2,
+        #2196f3,
+        #424242,
+        #ff5252
+    );
+    --toastify-color-progress-dark: #82b1ff;
+}

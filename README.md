@@ -33,6 +33,7 @@ A simple employee management application built with Vue 3 that allows you to vie
 - Vuetify (UI Framework)
 - Pinia (State Management)
 - Vee-Validate with Yup (Form validation)
+- vue3-toastify (Notifications)
 
 ## 📋 Features
 

@@ -13,12 +13,8 @@
                 :address="employee.mailingAddress"
             />
         </td>
-
         <td>
-            <div class="d-flex ga-4">
-                <v-btn :icon="'mdi-human-edit'" base-color="primary"></v-btn>
-                <v-btn :icon="'mdi-delete'" base-color="red-darken-2"></v-btn>
-            </div>
+            <EmployeeTableItemActions :employee />
         </td>
     </tr>
 </template>

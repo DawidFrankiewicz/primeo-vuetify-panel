@@ -1,11 +1,14 @@
 // Utilities
-import { JobTitle, type Employee } from '@/types/employee'
+import { JobTitle, type Employee, type EmployeeData } from '@/types/employee'
 import { defineStore } from 'pinia'
+import { nanoid } from 'nanoid'
+import { toast } from 'vue3-toastify'
 
 export const useEmployeeListStore = defineStore('employeeList', {
     state: (): { employeeList: Employee[] } => ({
         employeeList: [
             {
+                id: nanoid(),
                 firstNameAndLastName: 'John Doe',
                 email: 'john.doe@gmail.com',
                 jobTitle: JobTitle.FRONT_END,
@@ -26,6 +29,7 @@ export const useEmployeeListStore = defineStore('employeeList', {
                 },
             },
             {
+                id: nanoid(),
                 firstNameAndLastName: 'Alice Smith',
                 email: 'alice.smith@example.com',
                 jobTitle: JobTitle.BACK_END,
@@ -44,6 +48,7 @@ export const useEmployeeListStore = defineStore('employeeList', {
                 },
             },
             {
+                id: nanoid(),
                 firstNameAndLastName: 'Michael Brown',
                 email: 'michael.brown@example.co.uk',
                 jobTitle: JobTitle.BACK_END,
@@ -56,6 +61,7 @@ export const useEmployeeListStore = defineStore('employeeList', {
                 },
             },
             {
+                id: nanoid(),
                 firstNameAndLastName: 'Emma Davis',
                 email: 'emma.davis@company.com',
                 jobTitle: JobTitle.PM,
@@ -75,6 +81,7 @@ export const useEmployeeListStore = defineStore('employeeList', {
                 },
             },
             {
+                id: nanoid(),
                 firstNameAndLastName: 'Carlos Garcia',
                 email: 'carlos.garcia@business.es',
                 jobTitle: JobTitle.TESTER,
@@ -93,6 +100,7 @@ export const useEmployeeListStore = defineStore('employeeList', {
                 },
             },
             {
+                id: nanoid(),
                 firstNameAndLastName: 'Priya Patel',
                 email: 'priya.patel@design.in',
                 jobTitle: JobTitle.DESIGNER,
@@ -105,6 +113,7 @@ export const useEmployeeListStore = defineStore('employeeList', {
                 },
             },
             {
+                id: nanoid(),
                 firstNameAndLastName: 'Lars Andersen',
                 email: 'lars.andersen@qa.dk',
                 jobTitle: JobTitle.FRONT_END,
@@ -117,6 +126,7 @@ export const useEmployeeListStore = defineStore('employeeList', {
                 },
             },
             {
+                id: nanoid(),
                 firstNameAndLastName: 'Fatima Al-Hashimi',
                 email: 'fatima.alhashimi@data.ae',
                 jobTitle: JobTitle.TESTER,
@@ -138,4 +148,33 @@ export const useEmployeeListStore = defineStore('employeeList', {
             },
         ],
     }),
+    actions: {
+        removeEmployee(
+            id: string,
+            options: {
+                /** Defaults to: `true`*/
+                notify?: boolean
+            } = { notify: true },
+        ) {
+            const { notify = true } = options
+
+            this.employeeList = this.employeeList.filter(employee => employee.id !== id)
+            if (notify) toast.success('Usunięto pracownika')
+        },
+        /**
+         * Add a new employee (generates an `id` for you).
+         */
+        addEmployee(
+            data: EmployeeData,
+            options: {
+                /** Defaults to: `true`*/
+                notify?: boolean
+            } = { notify: true },
+        ) {
+            const { notify = true } = options
+
+            this.employeeList.push({ id: nanoid(), ...data })
+            if (notify) toast.success('Dodano nowego pracownika')
+        },
+    },
 })
