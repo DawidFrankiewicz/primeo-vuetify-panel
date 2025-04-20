@@ -12,7 +12,6 @@ declare module 'vue' {
     EmployeeDisplayAddressText: typeof import('./components/employee/DisplayAddressText.vue')['default']
     EmployeeForm: typeof import('./components/employee/Form.vue')['default']
     EmployeeTable: typeof import('./components/employee/Table.vue')['default']
-    EmployeeTableItem: typeof import('./components/employee/TableItem.vue')['default']
     EmployeeTableItemActions: typeof import('./components/employee/TableItemActions.vue')['default']
     EmployeeWidget: typeof import('./components/employee/Widget.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
