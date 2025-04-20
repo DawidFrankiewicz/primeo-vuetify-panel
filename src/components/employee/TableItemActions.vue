@@ -6,6 +6,7 @@
                     v-bind="activatorAttrs"
                     :icon="'mdi-human-edit'"
                     base-color="primary"
+                    variant="tonal"
                     @mousedown="isEditEmployeeDialogActive = true"
                     @click.stop
                 ></v-btn>
@@ -30,6 +31,7 @@
             <template #activator="{ props: activatorAttrs }">
                 <v-btn
                     v-bind="activatorAttrs"
+                    variant="tonal"
                     @mousedown="isRemoveDialogActive = true"
                     @click.stop
                     :icon="'mdi-delete'"
