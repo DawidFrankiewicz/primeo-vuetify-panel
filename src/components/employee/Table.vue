@@ -33,7 +33,7 @@ const headers: DataTableHeader<Employee>[] = [
     { title: 'Stanowisko', key: 'jobTitle', width: '100px' },
     { title: 'Adres zamieszkania', key: 'residentialAddress', sortable: false, width: '200px' },
     { title: 'Adres do korespondencji', key: 'mailingAddress', sortable: false, width: '200px' },
-    { key: 'actions', sortable: false, width: '116px' },
+    { key: 'actions', sortable: false, width: '116px', maxWidth: '116px', minWidth: '116px' },
 ]
 
 const getJobTitleColor = (title: JobTitle) => {

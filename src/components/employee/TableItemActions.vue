@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex ga-4">
+    <div class="d-flex justify-end ga-4">
         <v-dialog v-model="isEditEmployeeDialogActive" max-width="900">
             <template #activator="{ props: activatorAttrs }">
                 <v-btn
