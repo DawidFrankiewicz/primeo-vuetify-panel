@@ -4,16 +4,16 @@
         Brak pracowników do wyświetlenia
     </div>
     <v-data-table v-else :headers :items="employeeList" :items-per-page="-1">
-        <template #item.jobTitle="{ item }">
+        <template v-slot:[`item.jobTitle`]="{ item }">
             <v-chip :color="getJobTitleColor(item.jobTitle)">{{ item.jobTitle }}</v-chip>
         </template>
-        <template #item.residentialAddress="{ item }">
+        <template v-slot:[`item.residentialAddress`]="{ item }">
             <EmployeeDisplayAddressText :address="item.residentialAddress" />
         </template>
-        <template #item.mailingAddress="{ item }">
+        <template v-slot:[`item.mailingAddress`]="{ item }">
             <EmployeeDisplayAddressText v-if="item.mailingAddress" :address="item.mailingAddress" />
         </template>
-        <template #item.actions="{ item }">
+        <template v-slot:[`item.actions`]="{ item }">
             <EmployeeTableItemActions :employee="item" />
         </template>
         <template #bottom></template>
